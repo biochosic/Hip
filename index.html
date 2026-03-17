@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Math History 2.0 | CH4OSIC Digital</title>
+    <title>Math History 5.0 | CH4OSIC Digital</title>
     <style>
         :root {
             --bg-color: #0b0f1a;
@@ -14,19 +14,22 @@
             --dim-text: #94a3b8;
             --border-color: #2d3748;
             --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            --disc-color: #38bdf8; /* Блакитний */
+            --trinom-color: #10b981; /* Зелений */
         }
 
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', -apple-system, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.7;
+            overflow-x: hidden;
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
             padding: 2rem;
         }
@@ -52,7 +55,7 @@
 
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
             width: 100%;
             margin-top: 3rem;
@@ -60,7 +63,7 @@
 
         .nav-card {
             background: var(--card-bg);
-            padding: 3rem;
+            padding: 2.5rem;
             border-radius: 1.5rem;
             border: 1px solid var(--border-color);
             cursor: pointer;
@@ -73,243 +76,273 @@
             box-shadow: 0 20px 40px rgba(56, 189, 248, 0.15);
         }
 
-        /* СТИЛІ СТАТТІ */
-        .content-section {
-            display: none;
-            animation: fadeIn 0.8s ease;
-        }
-
-        .article-header {
-            text-align: center;
+        /* ПРАКТИЧНИЙ РОЗДІЛ: ВНУТРІШНЄ МЕНЮ */
+        .category-menu {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
             margin-bottom: 3rem;
+            flex-wrap: wrap;
         }
 
-        .article-title {
-            font-size: 2.5rem;
-            color: var(--accent-color);
-            margin-bottom: 1rem;
-        }
-
-        /* ЗОБРАЖЕННЯ ТА ОБТІКАННЯ */
-        .portrait-container {
-            float: right;
-            margin: 0 0 1.5rem 1.5rem;
-            max-width: 300px;
+        .cat-btn {
             background: var(--card-bg);
-            padding: 0.8rem;
-            border-radius: 1rem;
             border: 1px solid var(--border-color);
-            box-shadow: var(--shadow);
-            text-align: center;
-        }
-
-        .portrait-container img {
-            width: 100%;
-            height: auto;
-            border-radius: 0.5rem;
-            filter: grayscale(20%);
-            transition: 0.3s;
-        }
-
-        .portrait-container img:hover { filter: grayscale(0%); }
-
-        .caption {
-            display: block;
-            font-size: 0.85rem;
-            color: var(--dim-text);
-            margin-top: 0.5rem;
-            font-style: italic;
-        }
-
-        /* ІНФО-БЛОКИ */
-        .info-box {
-            margin: 2rem 0;
-            padding: 1.5rem;
-            border-radius: 1rem;
-            border-left: 4px solid;
-            background: rgba(255, 255, 255, 0.03);
-        }
-
-        .fact { border-color: #fbbf24; } /* Жовтий */
-        .important { border-color: #ef4444; } /* Червоний */
-        .history { border-color: #10b981; } /* Зелений */
-
-        .box-title {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
-        }
-
-        .formula-display {
-            background: #000;
-            padding: 2rem;
-            border-radius: 1rem;
-            font-family: 'serif';
-            font-size: 2rem;
-            text-align: center;
-            color: var(--accent-color);
-            margin: 2rem 0;
-            box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
-        }
-
-        .back-nav {
-            position: sticky;
-            top: 20px;
-            z-index: 100;
-            margin-bottom: 2rem;
-        }
-
-        .btn-back {
-            background: var(--card-bg);
             color: var(--text-color);
-            border: 1px solid var(--border-color);
-            padding: 0.6rem 1.2rem;
-            border-radius: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            border-radius: 2rem;
             cursor: pointer;
             transition: 0.3s;
+            font-weight: 600;
         }
 
-        .btn-back:hover { background: var(--accent-color); color: #000; }
-
-        /* АНІМАЦІЯ */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .cat-btn.active {
+            background: var(--accent-color);
+            color: #000;
+            border-color: var(--accent-color);
         }
 
-        @media (max-width: 768px) {
-            .portrait-container {
-                float: none;
-                margin: 0 auto 2rem;
-                max-width: 100%;
-            }
+        /* КАРТКИ ЗАДАЧ */
+        .tasks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
         }
+
+        .task-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+            display: none; /* Фільтрація через JS */
+            animation: zoomIn 0.4s ease forwards;
+        }
+
+        /* Полосочки акцентів */
+        .task-card.type-d::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 4px;
+            background: var(--disc-color);
+        }
+
+        .task-card.type-t::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 4px;
+            background: var(--trinom-color);
+        }
+
+        .task-condition { font-weight: 600; margin-bottom: 1rem; }
+
+        .solution-btn {
+            background: transparent;
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        .solution-btn:hover { background: var(--accent-color); color: #000; }
+
+        .solution-text {
+            display: none;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px dashed var(--border-color);
+            color: #10b981;
+            font-size: 0.95rem;
+        }
+
+        /* СТАТТІ (ВІЄТ ТА ДЕКАРТ) */
+        .content-section { display: none; animation: fadeIn 0.6s ease; }
+        .portrait-container { float: right; margin: 0 0 1.5rem 1.5rem; max-width: 250px; background: var(--card-bg); padding: 0.5rem; border-radius: 1rem; border: 1px solid var(--border-color); }
+        .portrait-container img { width: 100%; border-radius: 0.5rem; }
+        .formula-display { background: #000; padding: 1.5rem; border-radius: 1rem; font-size: 1.8rem; text-align: center; color: var(--accent-color); margin: 1.5rem 0; }
+        .btn-back-main { background: var(--card-bg); color: var(--text-color); border: 1px solid var(--border-color); padding: 0.6rem 1.2rem; border-radius: 0.5rem; cursor: pointer; margin-bottom: 2rem; transition: 0.3s; }
+        .btn-back-main:hover { border-color: var(--accent-color); color: var(--accent-color); }
+
+        /* АНІМАЦІЇ */
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes zoomIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+
+        @media (max-width: 768px) { .portrait-container { float: none; margin: 0 auto 2rem; } }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div id="main-menu">
-        <h1 class="hero-title">Архів Математики 2.0</h1>
-        <p style="color: var(--dim-text); font-size: 1.2rem;">Від стародавніх секретів до сучасної символьної мови</p>
-        
+        <h1 class="hero-title">Математичний Архів</h1>
         <div class="menu-grid">
-            <div class="nav-card" onclick="showArticle('vieta-article')">
-                <span style="font-size: 3rem;">🪶</span>
+            <div class="nav-card" onclick="showView('vieta-article')">
+                <span style="font-size: 2.5rem;">🪶</span>
                 <h2>Франсуа Вієт</h2>
-                <p>Батько символьної алгебри та королівський дешифрувальник.</p>
+                <p>Батько символьної алгебри</p>
             </div>
-            <div class="nav-card" onclick="showArticle('descartes-article')">
-                <span style="font-size: 3rem;">📐</span>
+            <div class="nav-card" onclick="showView('descartes-article')">
+                <span style="font-size: 2.5rem;">📐</span>
                 <h2>Рене Декарт</h2>
-                <p>Філософія дискримінанта та аналітична геометрія.</p>
+                <p>Філософія та дискримінант</p>
+            </div>
+            <div class="nav-card" onclick="showView('tasks-section')">
+                <span style="font-size: 2.5rem;">📝</span>
+                <h2>Практичні задачі</h2>
+                <p>Тренажер (Update 5.0)</p>
             </div>
         </div>
     </div>
 
     <article id="vieta-article" class="content-section">
-        <div class="back-nav">
-            <button class="btn-back" onclick="goHome()">← Повернутись до вибору</button>
-        </div>
-
-        <header class="article-header">
-            <h1 class="article-title">Франсуа Вієт: Творець символьної мови</h1>
-            <p class="caption">Життя та наукова спадщина видатного француза</p>
-        </header>
-
-        <div class="portrait-container">
-            <img src="vieta.jpg" alt="Франсуа Вієт">
-            <span class="caption">Портрет Франсуа Вієта (1540–1603)</span>
-        </div>
-
-        <p><b>Франсуа Вієт</b> народився 1540 року на півдні Франції в містечку Фонтене-ле-Конт у родині прокурора. Продовжуючи сімейну традицію, він вивчав право в університеті Пуатьє, де у 20 років отримав ступінь бакалавра юридичних наук. Проте його справжня пристрасть завжди належала "цариці наук".</p>
-
-        <div class="info-box history">
-            <span class="box-title">📜 Історична довідка: Королівський дешифрувальник</span>
-            <p>Вієт служив радником королів Генріха III та Генріха IV. Під час війни з Іспанією він врятував Францію не зброєю, а розумом. Іспанці використовували шифр із 500 символів, який Вієт розгадав за 15 днів. Отримавши таку перевагу, Франція знала кожен крок ворога. Розлючений іспанський король навіть подав скаргу Папі Римському, вимагаючи суду над "чаклуном" Вієтом.</p>
-        </div>
-
-        <h3>Математичний прорив</h3>
-        <p>До Вієта алгебра була "геометричною" або "словесною". Рівняння записували цілими реченнями, що робило розв'язання довгим і заплутаним. Вієт зробив революційний крок — він почав використовувати літери не лише для невідомих, а й для відомих величин (параметрів).</p>
-
-        <div class="formula-display">
-            x₁ + x₂ = -p <br>
-            x₁ · x₂ = q
-        </div>
-
-        <div class="info-box important">
-            <span class="box-title">💡 Важливо знати</span>
-            <p>Саме завдяки Вієту алгебра відокремилася від геометрії. Його система дозволила вивчати властивості рівнянь у загальному вигляді, незалежно від конкретних чисел. Це стало фундаментом для всього подальшого розвитку науки.</p>
-        </div>
-
-        <div class="info-box fact">
-            <span class="box-title">📋 Цікавий факт</span>
-            <p>Вієт був неймовірно працездатним. Кажуть, що коли він захоплювався якоюсь проблемою, він міг не спати й не їсти по три доби поспіль, повністю занурившись у розрахунки.</p>
-        </div>
+        <button class="btn-back-main" onclick="goHome()">← Назад до тем</button>
+        <div class="portrait-container"><img src="vieta.jpg" alt="Вієт"></div>
+        <h1>Франсуа Вієт</h1>
+        <p>Народився 1540 року. Геніальний математик і дешифрувальник, який ввів літерні позначення в алгебру.</p>
+        <div class="formula-display">x₁ + x₂ = -p, x₁ · x₂ = q</div>
     </article>
 
     <article id="descartes-article" class="content-section">
-        <div class="back-nav">
-            <button class="btn-back" onclick="goHome()">← Повернутись до вибору</button>
-        </div>
-
-        <header class="article-header">
-            <h1 class="article-title">Рене Декарт та Дискримінант</h1>
-            <p class="caption">Філософія точності та аналітична геометрія</p>
-        </header>
-
-        <div class="portrait-container">
-            <img src="descartes.jpg" alt="Рене Декарт">
-            <span class="caption">Рене Декарт (1596–1650)</span>
-        </div>
-
-        <p><b>Рене Декарт</b> — людина, яка навчила світ сумніватися у всьому, крім математики. Він народився в 1596 році. У дитинстві Рене мав дуже слабке здоров’я, через що в коледжі Ла-Флеш йому офіційно дозволяли лежати в ліжку до обіду. Ці години "лінивих" роздумів стали найпродуктивнішими в його житті.</p>
-
-        <h3>Етимологія та зміст</h3>
-        <p>Слово <b>"дискримінант"</b> походить від латинського <i>discriminans</i>, що означає "розрізняти". Ця назва ідеально відображає його суть — він "розрізняє" випадки розташування параболи відносно осі абсцис.</p>
-
-        <div class="formula-display">
-            D = b² - 4ac
-        </div>
-
-        <div class="info-box history">
-            <span class="box-title">📜 Геометричний зв'язок</span>
-            <p>Декарт заснував аналітичну геометрію. Завдяки йому ми знаємо:
-            <ul>
-                <li>Якщо <b>D > 0</b>: Парабола перетинає вісь X у двох точках.</li>
-                <li>Якщо <b>D = 0</b>: Парабола лише торкається осі в одній точці.</li>
-                <li>Якщо <b>D < 0</b>: Парабола "летить" над або під віссю, не торкаючись її.</li>
-            </ul>
-            </p>
-        </div>
-
-        <div class="info-box fact">
-            <span class="box-title">📋 Цікавий факт: Останні дні</span>
-            <p>Декарт помер у Швеції. Королева Крістіна запросила його бути її вчителем, але змушувала займатися о 5-й ранку в холодному замку. Для Декарта, який все життя звик працювати в теплому ліжку, це виявилося фатальним — він застудився і помер від пневмонії.</p>
-        </div>
-
-        <blockquote>
-            "Мислю, отже існую" (Cogito, ergo sum) — головний принцип Декарта, який він застосовував і в математиці, прагнучи до абсолютної доведеності кожного кроку.
-        </blockquote>
+        <button class="btn-back-main" onclick="goHome()">← Назад до тем</button>
+        <div class="portrait-container"><img src="descartes.jpg" alt="Декарт"></div>
+        <h1>Рене Декарт</h1>
+        <p>Засновник аналітичної геометрії. Ввів термін «дискримінант» для розрізнення кількості коренів.</p>
+        <div class="formula-display">D = b² - 4ac</div>
     </article>
+
+    <section id="tasks-section" class="content-section">
+        <button class="btn-back-main" onclick="goHome()">← Назад до тем</button>
+        <h1 style="text-align: center; color: var(--accent-color);">Практичний Тренажер</h1>
+        
+        <div class="category-menu">
+            <button class="cat-btn active" onclick="filterTasks('all', this)">Всі задачі</button>
+            <button class="cat-btn" onclick="filterTasks('type-d', this)">Дискримінант</button>
+            <button class="cat-btn" onclick="filterTasks('type-v', this)">Теорема Вієта</button>
+            <button class="cat-btn" onclick="filterTasks('type-t', this)">Квадратний тричлен</button>
+        </div>
+
+        <div class="tasks-grid">
+            <div class="task-card type-d">
+                <div class="task-condition">x² - 6x + 9 = 0. Знайти D.</div>
+                <button class="solution-btn" onclick="toggleSol(this)">Показати розв'язок</button>
+                <div class="solution-text">D = (-6)² - 4*1*9 = 36 - 36 = 0.</div>
+            </div>
+            <div class="task-card type-d">
+                <div class="task-condition">x² + 3x + 5 = 0. Скільки коренів?</div>
+                <button class="solution-btn" onclick="toggleSol(this)">Показати розв'язок</button>
+                <div class="solution-text">D = 3² - 4*1*5 = 9 - 20 = -11. D < 0, коренів немає.</div>
+            </div>
+            <div class="task-card type-d">
+                <div class="task-condition">2x² - 5x + 2 = 0. Знайти D.</div>
+                <button class="solution-btn" onclick="toggleSol(this)">Показати розв'язок</button>
+                <div class="solution-text">D = (-5)² - 4*2*2 = 25 - 16 = 9.</div>
+            </div>
+            <div class="task-card type-d">
+                <div class="task-condition">x² - 4x + 4 = 0. Скільки коренів?</div>
+                <button class="solution-btn" onclick="toggleSol(this)">Показати розв'язок</button>
+                <div class="solution-text">D = (-4)² - 4*1*4 = 0. Один корінь.</div>
+            </div>
+
+            <div class="task-card type-v">
+                <div class="task-condition">x² - 8x + 12 = 0. Сума та добуток?</div>
+                <button class="solution-btn" onclick="toggleSol(this)">Показати розв'язок</button>
+                <div class="solution-text">Сума: 8, Добуток: 12.</div>
+            </div>
+            <div class="task-card type-v">
+                <div class="task-condition">Корені -2 та 5. Скласти рівняння.</div>
+                <button class="solution-btn" onclick="toggleSol(this)">Показати розв'язок</button>
+                <div class="solution-text">x² - ( -2+5 )x + (-2*5) = x² - 3x - 10 = 0.</div>
+            </div>
+            <div class="task-card type-v">
+                <div class="task-condition">x² + 10x + 21 = 0. Знайти корені.</div>
+                <button class="solution-btn" onclick="toggleSol(this)">Показати розв'язок</button>
+                <div class="solution-text">x1 = -3, x2 = -7 (бо -3-7 = -10, -3*-7 = 21).</div>
+            </div>
+            <div class="task-card type-v">
+                <div class="task-condition">x² - 5x - 14 = 0. Сума та добуток?</div>
+                <button class="solution-btn" onclick="toggleSol(this)">Показати розв'язок</button>
+                <div class="solution-text">Сума: 5, Добуток: -14.</div>
+            </div>
+
+            <div class="task-card type-t">
+                <div class="task-condition">x² - 4x + 3. Знайти корені та розкласти.</div>
+                <button class="solution-btn" onclick="toggleSol(this)">Показати розв'язок</button>
+                <div class="solution-text">Корені 1 та 3. Розклад: (x - 1)(x - 3).</div>
+            </div>
+            <div class="task-card type-t">
+                <div class="task-condition">x² + 5x + 6. Розкласти на множники.</div>
+                <button class="solution-btn" onclick="toggleSol(this)">Показати розв'язок</button>
+                <div class="solution-text">Корені -2 та -3. Розклад: (x + 2)(x + 3).</div>
+            </div>
+            <div class="task-card type-t">
+                <div class="task-condition">x² - 2x - 8. Подати у вигляді добутку.</div>
+                <button class="solution-btn" onclick="toggleSol(this)">Показати розв'язок</button>
+                <div class="solution-text">Корені 4 та -2. Розклад: (x - 4)(x + 2).</div>
+            </div>
+            <div class="task-card type-t">
+                <div class="task-condition">x² + x + 1. Чи можна розкласти?</div>
+                <button class="solution-btn" onclick="toggleSol(this)">Показати розв'язок</button>
+                <div class="solution-text">D = 1 - 4 = -3. Розкласти не можна, бо немає дійсних коренів.</div>
+            </div>
+        </div>
+    </section>
 </div>
 
 <script>
-    function showArticle(id) {
+    // Навігація між основними розділами
+    function showView(id) {
         document.getElementById('main-menu').style.display = 'none';
-        const articles = document.querySelectorAll('.content-section');
-        articles.forEach(art => art.style.display = 'none');
-        
-        const target = document.getElementById(id);
-        target.style.display = 'block';
+        document.querySelectorAll('.content-section').forEach(s => s.style.display = 'none');
+        document.getElementById(id).style.display = 'block';
         window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+        // Якщо відкриваємо задачі, показуємо спочатку всі
+        if(id === 'tasks-section') {
+            filterTasks('all', document.querySelector('.cat-btn'));
+        }
     }
 
     function goHome() {
-        const articles = document.querySelectorAll('.content-section');
-        articles.forEach(art => art.style.display = 'none');
+        document.querySelectorAll('.content-section').forEach(s => s.style.display = 'none');
         document.getElementById('main-menu').style.display = 'flex';
+    }
+
+    // Логіка фільтрації задач
+    function filterTasks(type, btn) {
+        // Оновлюємо кнопки
+        document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const cards = document.querySelectorAll('.task-card');
+        cards.forEach(card => {
+            // Приховуємо відповіді при перемиканні
+            card.querySelector('.solution-text').style.display = 'none';
+            card.querySelector('.solution-btn').textContent = "Показати розв'язок";
+
+            if (type === 'all' || card.classList.contains(type)) {
+                card.style.display = 'flex';
+                card.style.flexDirection = 'column';
+                card.style.justifyContent = 'space-between';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    // Показ/приховування розв'язку
+    function toggleSol(btn) {
+        const sol = btn.nextElementSibling;
+        if (sol.style.display === 'block') {
+            sol.style.display = 'none';
+            btn.textContent = "Показати розв'язок";
+        } else {
+            sol.style.display = 'block';
+            btn.textContent = "Приховати розв'язок";
+        }
     }
 </script>
 
