@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Math History 5.0 | CH4OSIC Digital</title>
+    <title>Math History 6.0 | CH4OSIC Digital</title>
     <style>
         :root {
             --bg-color: #0b0f1a;
@@ -14,8 +14,9 @@
             --dim-text: #94a3b8;
             --border-color: #2d3748;
             --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            --disc-color: #38bdf8; /* Блакитний */
-            --trinom-color: #10b981; /* Зелений */
+            --disc-color: #38bdf8;
+            --trinom-color: #10b981;
+            --correct-color: #10b981;
         }
 
         body {
@@ -40,7 +41,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 80vh;
+            min-height: 85vh;
             text-align: center;
         }
 
@@ -55,15 +56,15 @@
 
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
             width: 100%;
             margin-top: 3rem;
         }
 
         .nav-card {
             background: var(--card-bg);
-            padding: 2.5rem;
+            padding: 2rem;
             border-radius: 1.5rem;
             border: 1px solid var(--border-color);
             cursor: pointer;
@@ -71,107 +72,93 @@
         }
 
         .nav-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-8px);
             border-color: var(--accent-color);
-            box-shadow: 0 20px 40px rgba(56, 189, 248, 0.15);
+            box-shadow: 0 15px 30px rgba(56, 189, 248, 0.15);
         }
 
-        /* ПРАКТИЧНИЙ РОЗДІЛ: ВНУТРІШНЄ МЕНЮ */
-        .category-menu {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
-        }
-
-        .cat-btn {
+        /* КНОПКИ ТА НАВІГАЦІЯ */
+        .btn-back-main {
             background: var(--card-bg);
-            border: 1px solid var(--border-color);
             color: var(--text-color);
-            padding: 0.8rem 1.5rem;
-            border-radius: 2rem;
-            cursor: pointer;
-            transition: 0.3s;
-            font-weight: 600;
-        }
-
-        .cat-btn.active {
-            background: var(--accent-color);
-            color: #000;
-            border-color: var(--accent-color);
-        }
-
-        /* КАРТКИ ЗАДАЧ */
-        .tasks-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .task-card {
-            background: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 1rem;
             border: 1px solid var(--border-color);
-            position: relative;
-            overflow: hidden;
-            display: none; /* Фільтрація через JS */
-            animation: zoomIn 0.4s ease forwards;
-        }
-
-        /* Полосочки акцентів */
-        .task-card.type-d::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 4px;
-            background: var(--disc-color);
-        }
-
-        .task-card.type-t::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 4px;
-            background: var(--trinom-color);
-        }
-
-        .task-condition { font-weight: 600; margin-bottom: 1rem; }
-
-        .solution-btn {
-            background: transparent;
-            border: 1px solid var(--accent-color);
-            color: var(--accent-color);
-            padding: 0.5rem;
+            padding: 0.6rem 1.2rem;
             border-radius: 0.5rem;
             cursor: pointer;
-            width: 100%;
+            margin-bottom: 2rem;
             transition: 0.3s;
         }
 
-        .solution-btn:hover { background: var(--accent-color); color: #000; }
+        .btn-back-main:hover { border-color: var(--accent-color); color: var(--accent-color); }
 
-        .solution-text {
-            display: none;
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px dashed var(--border-color);
-            color: #10b981;
-            font-size: 0.95rem;
-        }
-
-        /* СТАТТІ (ВІЄТ ТА ДЕКАРТ) */
+        /* СЕКЦІЇ КОНТЕНТУ */
         .content-section { display: none; animation: fadeIn 0.6s ease; }
         .portrait-container { float: right; margin: 0 0 1.5rem 1.5rem; max-width: 250px; background: var(--card-bg); padding: 0.5rem; border-radius: 1rem; border: 1px solid var(--border-color); }
         .portrait-container img { width: 100%; border-radius: 0.5rem; }
         .formula-display { background: #000; padding: 1.5rem; border-radius: 1rem; font-size: 1.8rem; text-align: center; color: var(--accent-color); margin: 1.5rem 0; }
-        .btn-back-main { background: var(--card-bg); color: var(--text-color); border: 1px solid var(--border-color); padding: 0.6rem 1.2rem; border-radius: 0.5rem; cursor: pointer; margin-bottom: 2rem; transition: 0.3s; }
-        .btn-back-main:hover { border-color: var(--accent-color); color: var(--accent-color); }
 
-        /* АНІМАЦІЇ */
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes zoomIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        /* РОЗДІЛ ЗАДАЧ */
+        .category-menu { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+        .cat-btn { background: var(--card-bg); border: 1px solid var(--border-color); color: var(--text-color); padding: 0.8rem 1.5rem; border-radius: 2rem; cursor: pointer; transition: 0.3s; }
+        .cat-btn.active { background: var(--accent-color); color: #000; }
+        .tasks-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+        .task-card { background: var(--card-bg); padding: 1.5rem; border-radius: 1rem; border: 1px solid var(--border-color); position: relative; overflow: hidden; display: none; }
+        .task-card.type-d::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--disc-color); }
+        .task-card.type-t::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--trinom-color); }
+        .solution-btn { background: transparent; border: 1px solid var(--accent-color); color: var(--accent-color); padding: 0.5rem; border-radius: 0.5rem; cursor: pointer; width: 100%; margin-top: 10px; }
+        .solution-text { display: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed var(--border-color); color: var(--correct-color); }
 
-        @media (max-width: 768px) { .portrait-container { float: none; margin: 0 auto 2rem; } }
+        /* РОЗДІЛ ТЕСТУВАННЯ */
+        #test-selection { text-align: center; }
+        .test-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 1.5rem;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: #2d3748;
+            border-radius: 3px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        #progress-inner {
+            height: 100%;
+            background: var(--accent-color);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .question-text { font-size: 1.3rem; font-weight: 600; margin-bottom: 2rem; }
+
+        .options-grid { display: flex; flex-direction: column; gap: 1rem; }
+
+        .option-btn {
+            background: #1e293b;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 1rem;
+            border-radius: 0.8rem;
+            cursor: pointer;
+            text-align: left;
+            transition: 0.2s;
+            font-size: 1rem;
+        }
+
+        .option-btn:hover { border-color: var(--accent-color); background: #334155; }
+
+        #result-screen { text-align: center; display: none; }
+        .score-text { font-size: 3rem; font-weight: 800; color: var(--accent-color); margin: 1rem 0; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 600px) { .menu-grid { grid-template-columns: 1fr; } .portrait-container { float: none; margin: 0 auto 1.5rem; } }
     </style>
 </head>
 <body>
@@ -181,168 +168,184 @@
         <h1 class="hero-title">Математичний Архів</h1>
         <div class="menu-grid">
             <div class="nav-card" onclick="showView('vieta-article')">
-                <span style="font-size: 2.5rem;">🪶</span>
-                <h2>Франсуа Вієт</h2>
-                <p>Батько символьної алгебри</p>
+                <span style="font-size: 2.2rem;">🪶</span>
+                <h2>Вієт</h2>
             </div>
             <div class="nav-card" onclick="showView('descartes-article')">
-                <span style="font-size: 2.5rem;">📐</span>
-                <h2>Рене Декарт</h2>
-                <p>Філософія та дискримінант</p>
+                <span style="font-size: 2.2rem;">📐</span>
+                <h2>Декарт</h2>
             </div>
             <div class="nav-card" onclick="showView('tasks-section')">
-                <span style="font-size: 2.5rem;">📝</span>
-                <h2>Практичні задачі</h2>
-                <p>Тренажер (Update 5.0)</p>
+                <span style="font-size: 2.2rem;">📝</span>
+                <h2>Задачі</h2>
+            </div>
+            <div class="nav-card" style="border-color: var(--secondary-accent);" onclick="showView('test-selection')">
+                <span style="font-size: 2.2rem;">📊</span>
+                <h2>Тест</h2>
             </div>
         </div>
     </div>
 
     <article id="vieta-article" class="content-section">
-        <button class="btn-back-main" onclick="goHome()">← Назад до тем</button>
+        <button class="btn-back-main" onclick="goHome()">← Назад</button>
         <div class="portrait-container"><img src="vieta.jpg" alt="Вієт"></div>
         <h1>Франсуа Вієт</h1>
-        <p>Народився 1540 року. Геніальний математик і дешифрувальник, який ввів літерні позначення в алгебру.</p>
+        <p>Геніальний математик і юрист. Творець буквеної символіки.</p>
         <div class="formula-display">x₁ + x₂ = -p, x₁ · x₂ = q</div>
     </article>
 
     <article id="descartes-article" class="content-section">
-        <button class="btn-back-main" onclick="goHome()">← Назад до тем</button>
+        <button class="btn-back-main" onclick="goHome()">← Назад</button>
         <div class="portrait-container"><img src="descartes.jpg" alt="Декарт"></div>
         <h1>Рене Декарт</h1>
-        <p>Засновник аналітичної геометрії. Ввів термін «дискримінант» для розрізнення кількості коренів.</p>
+        <p>Філософ та математик, що ввів поняття дискримінанта.</p>
         <div class="formula-display">D = b² - 4ac</div>
     </article>
 
     <section id="tasks-section" class="content-section">
-        <button class="btn-back-main" onclick="goHome()">← Назад до тем</button>
-        <h1 style="text-align: center; color: var(--accent-color);">Практичний Тренажер</h1>
-        
+        <button class="btn-back-main" onclick="goHome()">← Назад</button>
         <div class="category-menu">
-            <button class="cat-btn active" onclick="filterTasks('all', this)">Всі задачі</button>
-            <button class="cat-btn" onclick="filterTasks('type-d', this)">Дискримінант</button>
-            <button class="cat-btn" onclick="filterTasks('type-v', this)">Теорема Вієта</button>
-            <button class="cat-btn" onclick="filterTasks('type-t', this)">Квадратний тричлен</button>
+            <button class="cat-btn active" onclick="filterTasks('all', this)">Всі</button>
+            <button class="cat-btn" onclick="filterTasks('type-d', this)">D</button>
+            <button class="cat-btn" onclick="filterTasks('type-v', this)">Вієт</button>
+            <button class="cat-btn" onclick="filterTasks('type-t', this)">Тричлен</button>
         </div>
-
-        <div class="tasks-grid">
-            <div class="task-card type-d">
+        <div class="tasks-grid" id="tasks-grid-container">
+            <div class="task-card type-d" style="display:flex">
                 <div class="task-condition">x² - 6x + 9 = 0. Знайти D.</div>
-                <button class="solution-btn" onclick="toggleSol(this)">Показати розв'язок</button>
-                <div class="solution-text">D = (-6)² - 4*1*9 = 36 - 36 = 0.</div>
+                <button class="solution-btn" onclick="toggleSol(this)">Розв'язок</button>
+                <div class="solution-text">D = 0</div>
             </div>
-            <div class="task-card type-d">
-                <div class="task-condition">x² + 3x + 5 = 0. Скільки коренів?</div>
-                <button class="solution-btn" onclick="toggleSol(this)">Показати розв'язок</button>
-                <div class="solution-text">D = 3² - 4*1*5 = 9 - 20 = -11. D < 0, коренів немає.</div>
             </div>
-            <div class="task-card type-d">
-                <div class="task-condition">2x² - 5x + 2 = 0. Знайти D.</div>
-                <button class="solution-btn" onclick="toggleSol(this)">Показати розв'язок</button>
-                <div class="solution-text">D = (-5)² - 4*2*2 = 25 - 16 = 9.</div>
-            </div>
-            <div class="task-card type-d">
-                <div class="task-condition">x² - 4x + 4 = 0. Скільки коренів?</div>
-                <button class="solution-btn" onclick="toggleSol(this)">Показати розв'язок</button>
-                <div class="solution-text">D = (-4)² - 4*1*4 = 0. Один корінь.</div>
-            </div>
+    </section>
 
-            <div class="task-card type-v">
-                <div class="task-condition">x² - 8x + 12 = 0. Сума та добуток?</div>
-                <button class="solution-btn" onclick="toggleSol(this)">Показати розв'язок</button>
-                <div class="solution-text">Сума: 8, Добуток: 12.</div>
+    <section id="test-selection" class="content-section">
+        <button class="btn-back-main" onclick="goHome()">← Назад</button>
+        <h1 class="hero-title" style="font-size: 2.5rem;">Виберіть тест</h1>
+        <div class="menu-grid" style="max-width: 600px; margin: 2rem auto;">
+            <div class="nav-card" onclick="startTest('discriminant')">
+                <h3>Дискримінант</h3>
+                <p>5 питань</p>
             </div>
-            <div class="task-card type-v">
-                <div class="task-condition">Корені -2 та 5. Скласти рівняння.</div>
-                <button class="solution-btn" onclick="toggleSol(this)">Показати розв'язок</button>
-                <div class="solution-text">x² - ( -2+5 )x + (-2*5) = x² - 3x - 10 = 0.</div>
+            <div class="nav-card" onclick="startTest('vieta')">
+                <h3>Теорема Вієта</h3>
+                <p>5 питань</p>
             </div>
-            <div class="task-card type-v">
-                <div class="task-condition">x² + 10x + 21 = 0. Знайти корені.</div>
-                <button class="solution-btn" onclick="toggleSol(this)">Показати розв'язок</button>
-                <div class="solution-text">x1 = -3, x2 = -7 (бо -3-7 = -10, -3*-7 = 21).</div>
-            </div>
-            <div class="task-card type-v">
-                <div class="task-condition">x² - 5x - 14 = 0. Сума та добуток?</div>
-                <button class="solution-btn" onclick="toggleSol(this)">Показати розв'язок</button>
-                <div class="solution-text">Сума: 5, Добуток: -14.</div>
-            </div>
+        </div>
+    </section>
 
-            <div class="task-card type-t">
-                <div class="task-condition">x² - 4x + 3. Знайти корені та розкласти.</div>
-                <button class="solution-btn" onclick="toggleSol(this)">Показати розв'язок</button>
-                <div class="solution-text">Корені 1 та 3. Розклад: (x - 1)(x - 3).</div>
-            </div>
-            <div class="task-card type-t">
-                <div class="task-condition">x² + 5x + 6. Розкласти на множники.</div>
-                <button class="solution-btn" onclick="toggleSol(this)">Показати розв'язок</button>
-                <div class="solution-text">Корені -2 та -3. Розклад: (x + 2)(x + 3).</div>
-            </div>
-            <div class="task-card type-t">
-                <div class="task-condition">x² - 2x - 8. Подати у вигляді добутку.</div>
-                <button class="solution-btn" onclick="toggleSol(this)">Показати розв'язок</button>
-                <div class="solution-text">Корені 4 та -2. Розклад: (x - 4)(x + 2).</div>
-            </div>
-            <div class="task-card type-t">
-                <div class="task-condition">x² + x + 1. Чи можна розкласти?</div>
-                <button class="solution-btn" onclick="toggleSol(this)">Показати розв'язок</button>
-                <div class="solution-text">D = 1 - 4 = -3. Розкласти не можна, бо немає дійсних коренів.</div>
-            </div>
+    <section id="test-screen" class="content-section">
+        <div class="test-container">
+            <div class="progress-bar"><div id="progress-inner"></div></div>
+            <p id="question-counter" style="color: var(--dim-text); font-size: 0.9rem; margin-bottom: 0.5rem;">Питання 1 з 5</p>
+            <div id="question-text" class="question-text">Завантаження питання...</div>
+            <div id="options-container" class="options-grid"></div>
+        </div>
+    </section>
+
+    <section id="result-screen" class="content-section">
+        <div class="test-container">
+            <h2>Тест завершено!</h2>
+            <p>Ваш результат:</p>
+            <div id="final-score" class="score-text">0 з 5</div>
+            <button class="cat-btn active" style="margin-right: 10px;" onclick="showView('test-selection')">Спробувати ще</button>
+            <button class="cat-btn" onclick="goHome()">На головну</button>
         </div>
     </section>
 </div>
 
 <script>
-    // Навігація між основними розділами
+    // БАЗА ДАНИХ ТЕСТІВ
+    const testData = {
+        discriminant: [
+            { q: "Чому дорівнює D у рівнянні x² - 4x + 3 = 0?", a: ["4", "16", "8"], c: 0 },
+            { q: "Якщо D = 0, скільки коренів має рівняння?", a: ["0", "1", "2"], c: 1 },
+            { q: "Яка формула дискримінанта?", a: ["b²-4ac", "b²-ac", "a²+b²"], c: 0 },
+            { q: "Якщо D < 0, то корені...", a: ["додатні", "від'ємні", "відсутні"], c: 2 },
+            { q: "Знайдіть D для рівняння x² + x + 1 = 0.", a: ["1", "-3", "0"], c: 1 }
+        ],
+        vieta: [
+            { q: "Сума коренів рівняння x² - 5x + 6 = 0?", a: ["5", "-5", "6"], c: 0 },
+            { q: "Добуток коренів рівняння x² + 2x - 8 = 0?", a: ["2", "-8", "8"], c: 1 },
+            { q: "Хто за фахом був Франсуа Вієт?", a: ["Кухар", "Юрист", "Воїн"], c: 1 },
+            { q: "Яке рівняння має корені 1 і 2?", a: ["x²-3x+2=0", "x²+3x+2=0", "x²-2x+1=0"], c: 0 },
+            { q: "Чи можна застосувати Вієта, якщо D < 0?", a: ["Так", "Ні", "Тільки в середу"], c: 1 }
+        ]
+    };
+
+    let currentTest = [];
+    let currentQIndex = 0;
+    let score = 0;
+
+    // НАВІГАЦІЯ
     function showView(id) {
-        document.getElementById('main-menu').style.display = 'none';
         document.querySelectorAll('.content-section').forEach(s => s.style.display = 'none');
+        document.getElementById('main-menu').style.display = (id === 'main-menu' ? 'flex' : 'none');
         document.getElementById(id).style.display = 'block';
         window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function goHome() { showView('main-menu'); }
+
+    // ЛОГІКА ТЕСТУ
+    function startTest(type) {
+        currentTest = testData[type];
+        currentQIndex = 0;
+        score = 0;
+        showView('test-screen');
+        renderQuestion();
+    }
+
+    function renderQuestion() {
+        const qData = currentTest[currentQIndex];
+        document.getElementById('question-text').innerText = qData.q;
+        document.getElementById('question-counter').innerText = `Питання ${currentQIndex + 1} з ${currentTest.length}`;
+        document.getElementById('progress-inner').style.width = `${((currentQIndex) / currentTest.length) * 100}%`;
         
-        // Якщо відкриваємо задачі, показуємо спочатку всі
-        if(id === 'tasks-section') {
-            filterTasks('all', document.querySelector('.cat-btn'));
-        }
-    }
-
-    function goHome() {
-        document.querySelectorAll('.content-section').forEach(s => s.style.display = 'none');
-        document.getElementById('main-menu').style.display = 'flex';
-    }
-
-    // Логіка фільтрації задач
-    function filterTasks(type, btn) {
-        // Оновлюємо кнопки
-        document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        const cards = document.querySelectorAll('.task-card');
-        cards.forEach(card => {
-            // Приховуємо відповіді при перемиканні
-            card.querySelector('.solution-text').style.display = 'none';
-            card.querySelector('.solution-btn').textContent = "Показати розв'язок";
-
-            if (type === 'all' || card.classList.contains(type)) {
-                card.style.display = 'flex';
-                card.style.flexDirection = 'column';
-                card.style.justifyContent = 'space-between';
-            } else {
-                card.style.display = 'none';
-            }
+        const container = document.getElementById('options-container');
+        container.innerHTML = '';
+        
+        qData.a.forEach((opt, index) => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.innerText = opt;
+            btn.onclick = () => handleAnswer(index);
+            container.appendChild(btn);
         });
     }
 
-    // Показ/приховування розв'язку
+    function handleAnswer(selectedIndex) {
+        if (selectedIndex === currentTest[currentQIndex].c) {
+            score++;
+        }
+        
+        currentQIndex++;
+        if (currentQIndex < currentTest.length) {
+            renderQuestion();
+        } else {
+            showResult();
+        }
+    }
+
+    function showResult() {
+        showView('result-screen');
+        document.getElementById('final-score').innerText = `${score} з ${currentTest.length}`;
+        document.getElementById('progress-inner').style.width = '100%';
+    }
+
+    // ЛОГІКА ЗАДАЧ (Update 5.0)
+    function filterTasks(type, btn) {
+        document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.querySelectorAll('.task-card').forEach(card => {
+            card.style.display = (type === 'all' || card.classList.contains(type)) ? 'flex' : 'none';
+        });
+    }
+
     function toggleSol(btn) {
         const sol = btn.nextElementSibling;
-        if (sol.style.display === 'block') {
-            sol.style.display = 'none';
-            btn.textContent = "Показати розв'язок";
-        } else {
-            sol.style.display = 'block';
-            btn.textContent = "Приховати розв'язок";
-        }
+        sol.style.display = (sol.style.display === 'block' ? 'none' : 'block');
+        btn.textContent = (sol.style.display === 'block' ? 'Приховати' : 'Розв\'язок');
     }
 </script>
 
