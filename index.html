@@ -3,33 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Математичний Довідник | CH4OSIC Edition</title>
+    <title>Math History 2.0 | CH4OSIC Digital</title>
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
+            --bg-color: #0b0f1a;
+            --card-bg: #161b2a;
             --accent-color: #38bdf8;
-            --text-color: #f1f5f9;
-            --secondary-text: #94a3b8;
-            --quote-bg: #334155;
-            --transition: all 0.3s ease;
+            --secondary-accent: #818cf8;
+            --text-color: #e2e8f0;
+            --dim-text: #94a3b8;
+            --border-color: #2d3748;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            line-height: 1.7;
         }
 
         .container {
-            width: 95%;
-            max-width: 900px;
+            max-width: 1000px;
+            margin: 0 auto;
             padding: 2rem;
         }
 
@@ -37,238 +35,283 @@
         #main-menu {
             display: flex;
             flex-direction: column;
-            gap: 2rem;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
             text-align: center;
-            animation: fadeIn 0.5s ease-out;
         }
 
-        .menu-title {
-            font-size: clamp(2rem, 5vw, 3rem);
-            margin-bottom: 0.5rem;
-            background: linear-gradient(90deg, #38bdf8, #818cf8);
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-color), var(--secondary-accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .button-grid {
+        .menu-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
+            width: 100%;
+            margin-top: 3rem;
         }
 
         .nav-card {
             background: var(--card-bg);
             padding: 3rem;
             border-radius: 1.5rem;
-            border: 1px solid #334155;
+            border: 1px solid var(--border-color);
             cursor: pointer;
-            transition: var(--transition);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .nav-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-10px);
             border-color: var(--accent-color);
-            box-shadow: 0 15px 30px -10px rgba(56, 189, 248, 0.3);
+            box-shadow: 0 20px 40px rgba(56, 189, 248, 0.15);
         }
 
-        /* СЕКЦІЇ КОНТЕНТУ */
+        /* СТИЛІ СТАТТІ */
         .content-section {
             display: none;
-            background: var(--card-bg);
-            padding: clamp(1.5rem, 5vw, 3rem);
-            border-radius: 2rem;
-            animation: slideUp 0.5s ease-out;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.8s ease;
         }
 
-        .formula-box {
-            background: #0f172a;
-            padding: 1.5rem;
-            border-left: 5px solid var(--accent-color);
-            border-radius: 0.5rem;
-            font-family: 'Courier New', monospace;
-            font-size: 1.5rem;
-            margin: 2rem 0;
-            color: var(--accent-color);
+        .article-header {
             text-align: center;
+            margin-bottom: 3rem;
         }
 
-        /* СТИЛІЗОВАНІ ІКОНКИ ТА БІОГРАФІЯ */
-        .bio-header {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid #334155;
-        }
-
-        .icon-box {
-            min-width: 80px;
-            height: 80px;
-            background: #334155;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 2rem;
+        .article-title {
+            font-size: 2.5rem;
             color: var(--accent-color);
-            border: 2px dashed var(--accent-color);
-        }
-
-        h1, h2, h3 { color: var(--text-color); }
-        
-        ul {
-            padding-left: 1.2rem;
-            color: var(--secondary-text);
-        }
-
-        ul li { margin-bottom: 0.8rem; }
-
-        blockquote {
-            background: var(--quote-bg);
-            border-left: 4px solid var(--accent-color);
-            margin: 1.5rem 0;
-            padding: 1rem 1.5rem;
-            font-style: italic;
-            border-radius: 0 0.5rem 0.5rem 0;
-        }
-
-        .fact-badge {
-            display: inline-block;
-            background: rgba(56, 189, 248, 0.1);
-            color: var(--accent-color);
-            padding: 0.3rem 0.8rem;
-            border-radius: 2rem;
-            font-size: 0.85rem;
             margin-bottom: 1rem;
         }
 
-        .back-btn {
+        /* ЗОБРАЖЕННЯ ТА ОБТІКАННЯ */
+        .portrait-container {
+            float: right;
+            margin: 0 0 1.5rem 1.5rem;
+            max-width: 300px;
+            background: var(--card-bg);
+            padding: 0.8rem;
+            border-radius: 1rem;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .portrait-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            filter: grayscale(20%);
+            transition: 0.3s;
+        }
+
+        .portrait-container img:hover { filter: grayscale(0%); }
+
+        .caption {
             display: block;
-            width: fit-content;
-            margin: 2rem auto 0;
-            padding: 0.8rem 2rem;
-            background: transparent;
+            font-size: 0.85rem;
+            color: var(--dim-text);
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        /* ІНФО-БЛОКИ */
+        .info-box {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            border-left: 4px solid;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .fact { border-color: #fbbf24; } /* Жовтий */
+        .important { border-color: #ef4444; } /* Червоний */
+        .history { border-color: #10b981; } /* Зелений */
+
+        .box-title {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .formula-display {
+            background: #000;
+            padding: 2rem;
+            border-radius: 1rem;
+            font-family: 'serif';
+            font-size: 2rem;
+            text-align: center;
+            color: var(--accent-color);
+            margin: 2rem 0;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .back-nav {
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            margin-bottom: 2rem;
+        }
+
+        .btn-back {
+            background: var(--card-bg);
             color: var(--text-color);
-            border: 1px solid var(--secondary-text);
-            border-radius: 2rem;
+            border: 1px solid var(--border-color);
+            padding: 0.6rem 1.2rem;
+            border-radius: 0.5rem;
             cursor: pointer;
-            transition: var(--transition);
+            transition: 0.3s;
         }
 
-        .back-btn:hover {
-            background: var(--text-color);
-            color: var(--bg-color);
+        .btn-back:hover { background: var(--accent-color); color: #000; }
+
+        /* АНІМАЦІЯ */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* АНІМАЦІЇ */
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-
-        @media (max-width: 600px) {
-            .bio-header { flex-direction: column; text-align: center; }
+        @media (max-width: 768px) {
+            .portrait-container {
+                float: none;
+                margin: 0 auto 2rem;
+                max-width: 100%;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div id="main-menu">
-            <h1 class="menu-title">Математичний Всесвіт</h1>
-            <p style="color: var(--secondary-text);">Алгебраїчні інструменти та їхні творці</p>
-            <div class="button-grid">
-                <div class="nav-card" onclick="showSection('discriminant')">
-                    <h2>Дискримінант</h2>
-                    <p style="font-size: 0.9rem; color: var(--secondary-text); margin-top: 10px;">Рене Декарт та аналіз коренів</p>
-                </div>
-                <div class="nav-card" onclick="showSection('vieta')">
-                    <h2>Теорема Вієта</h2>
-                    <p style="font-size: 0.9rem; color: var(--secondary-text); margin-top: 10px;">Франсуа Вієт та мова символів</p>
-                </div>
+<div class="container">
+    <div id="main-menu">
+        <h1 class="hero-title">Архів Математики 2.0</h1>
+        <p style="color: var(--dim-text); font-size: 1.2rem;">Від стародавніх секретів до сучасної символьної мови</p>
+        
+        <div class="menu-grid">
+            <div class="nav-card" onclick="showArticle('vieta-article')">
+                <span style="font-size: 3rem;">🪶</span>
+                <h2>Франсуа Вієт</h2>
+                <p>Батько символьної алгебри та королівський дешифрувальник.</p>
             </div>
-        </div>
-
-        <div id="discriminant" class="content-section">
-            <span class="fact-badge">Алгебра & Геометрія</span>
-            <h1>Поняття Дискримінанта</h1>
-            <p>Величина, що дозволяє «розрізняти» типи розв'язків квадратного рівняння.</p>
-            
-            <div class="formula-box">D = b² - 4ac</div>
-
-            <div class="bio-header">
-                <div class="icon-box">📜</div>
-                <div>
-                    <h2>Рене Декарт</h2>
-                    <p style="font-style: italic; color: var(--accent-color);">Мислитель, що об'єднав числа та простір</p>
-                </div>
+            <div class="nav-card" onclick="showArticle('descartes-article')">
+                <span style="font-size: 3rem;">📐</span>
+                <h2>Рене Декарт</h2>
+                <p>Філософія дискримінанта та аналітична геометрія.</p>
             </div>
-
-            <p>Хоча сам термін став офіційним пізніше, саме <b>Рене Декарт</b> у своїй фундаментальній праці <i>«Геометрія» (1637 рік)</i> заклав основи аналізу коренів рівняння через подібні вирази.</p>
-            
-            <ul>
-                <li><b>Походження:</b> Народився у 1596 році в Ла-Е-ан-Турен, Франція.</li>
-                <li><b>Життєвий шлях:</b> Його життя було сповнене пригод — від служби в армії, що дала йому змогу подорожувати Європою, до спокійних років у Нідерландах, де він присвятив себе науці.</li>
-                <li><b>Науковий внесок:</b> Саме завдяки йому ми використовуємо змінні <i>x, y, z</i> та коефіцієнти <i>a, b, c</i>. Він ввів поняття дискримінанта (від лат. <i>discriminans</i> — «той, що розділяє») для розрізнення коренів.</li>
-            </ul>
-
-            <blockquote>
-                «Cogito, ergo sum» — Мислю, отже існую.
-            </blockquote>
-
-            <button class="back-btn" onclick="showMainMenu()">На головну</button>
-        </div>
-
-        <div id="vieta" class="content-section">
-            <span class="fact-badge">Батько алгебри</span>
-            <h1>Теорема Вієта</h1>
-            <p>Спритний спосіб знайти корені рівняння, не використовуючи складні формули.</p>
-            
-            <div class="formula-box">
-                x₁ + x₂ = -p <br>
-                x₁ * x₂ = q
-            </div>
-
-            <div class="bio-header">
-                <div class="icon-box">🪶</div>
-                <div>
-                    <h2>Франсуа Вієт</h2>
-                    <p style="font-style: italic; color: var(--accent-color);">Сеньйор де ла Біготьє</p>
-                </div>
-            </div>
-
-            <p>Франсуа Вієт не був професійним математиком, але він здійснив революцію, яка дозволила математиці стати мовою символів.</p>
-
-            <ul>
-                <li><b>Походження та освіта:</b> Народився 1540 року у Фонтене-ле-Конт. Здобув юридичну освіту в університеті Пуатьє.</li>
-                <li><b>Державна кар'єра:</b> Завдяки своєму гострому розуму став таємним радником двох королів — Генріха III та Генріха IV.</li>
-                <li><b>Майстер шифрів:</b> Під час війни з Іспанією Вієт за 15 днів розгадав надскладний іспанський шифр (500+ символів). Іспанський король був настільки вражений успіхами французів, що подав скаргу Папі Римському, стверджуючи, що проти них бореться <i>чаклун</i>.</li>
-                <li><b>Статус:</b> Його називають «батьком сучасної алгебри», бо він першим ввів літерні позначення для невідомих та параметрів.</li>
-            </ul>
-
-            <blockquote>
-                «Математика — це не лише числа, це метод мислення.»
-            </blockquote>
-
-            <button class="back-btn" onclick="showMainMenu()">На головну</button>
         </div>
     </div>
 
-    <script>
-        function showSection(sectionId) {
-            document.getElementById('main-menu').style.display = 'none';
-            const sections = document.querySelectorAll('.content-section');
-            sections.forEach(s => s.style.display = 'none');
-            const activeSection = document.getElementById(sectionId);
-            activeSection.style.display = 'block';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+    <article id="vieta-article" class="content-section">
+        <div class="back-nav">
+            <button class="btn-back" onclick="goHome()">← Повернутись до вибору</button>
+        </div>
 
-        function showMainMenu() {
-            const sections = document.querySelectorAll('.content-section');
-            sections.forEach(s => s.style.display = 'none');
-            document.getElementById('main-menu').style.display = 'flex';
-        }
-    </script>
+        <header class="article-header">
+            <h1 class="article-title">Франсуа Вієт: Творець символьної мови</h1>
+            <p class="caption">Життя та наукова спадщина видатного француза</p>
+        </header>
+
+        <div class="portrait-container">
+            <img src="vieta.jpg" alt="Франсуа Вієт">
+            <span class="caption">Портрет Франсуа Вієта (1540–1603)</span>
+        </div>
+
+        <p><b>Франсуа Вієт</b> народився 1540 року на півдні Франції в містечку Фонтене-ле-Конт у родині прокурора. Продовжуючи сімейну традицію, він вивчав право в університеті Пуатьє, де у 20 років отримав ступінь бакалавра юридичних наук. Проте його справжня пристрасть завжди належала "цариці наук".</p>
+
+        <div class="info-box history">
+            <span class="box-title">📜 Історична довідка: Королівський дешифрувальник</span>
+            <p>Вієт служив радником королів Генріха III та Генріха IV. Під час війни з Іспанією він врятував Францію не зброєю, а розумом. Іспанці використовували шифр із 500 символів, який Вієт розгадав за 15 днів. Отримавши таку перевагу, Франція знала кожен крок ворога. Розлючений іспанський король навіть подав скаргу Папі Римському, вимагаючи суду над "чаклуном" Вієтом.</p>
+        </div>
+
+        <h3>Математичний прорив</h3>
+        <p>До Вієта алгебра була "геометричною" або "словесною". Рівняння записували цілими реченнями, що робило розв'язання довгим і заплутаним. Вієт зробив революційний крок — він почав використовувати літери не лише для невідомих, а й для відомих величин (параметрів).</p>
+
+        <div class="formula-display">
+            x₁ + x₂ = -p <br>
+            x₁ · x₂ = q
+        </div>
+
+        <div class="info-box important">
+            <span class="box-title">💡 Важливо знати</span>
+            <p>Саме завдяки Вієту алгебра відокремилася від геометрії. Його система дозволила вивчати властивості рівнянь у загальному вигляді, незалежно від конкретних чисел. Це стало фундаментом для всього подальшого розвитку науки.</p>
+        </div>
+
+        <div class="info-box fact">
+            <span class="box-title">📋 Цікавий факт</span>
+            <p>Вієт був неймовірно працездатним. Кажуть, що коли він захоплювався якоюсь проблемою, він міг не спати й не їсти по три доби поспіль, повністю занурившись у розрахунки.</p>
+        </div>
+    </article>
+
+    <article id="descartes-article" class="content-section">
+        <div class="back-nav">
+            <button class="btn-back" onclick="goHome()">← Повернутись до вибору</button>
+        </div>
+
+        <header class="article-header">
+            <h1 class="article-title">Рене Декарт та Дискримінант</h1>
+            <p class="caption">Філософія точності та аналітична геометрія</p>
+        </header>
+
+        <div class="portrait-container">
+            <img src="descartes.jpg" alt="Рене Декарт">
+            <span class="caption">Рене Декарт (1596–1650)</span>
+        </div>
+
+        <p><b>Рене Декарт</b> — людина, яка навчила світ сумніватися у всьому, крім математики. Він народився в 1596 році. У дитинстві Рене мав дуже слабке здоров’я, через що в коледжі Ла-Флеш йому офіційно дозволяли лежати в ліжку до обіду. Ці години "лінивих" роздумів стали найпродуктивнішими в його житті.</p>
+
+        <h3>Етимологія та зміст</h3>
+        <p>Слово <b>"дискримінант"</b> походить від латинського <i>discriminans</i>, що означає "розрізняти". Ця назва ідеально відображає його суть — він "розрізняє" випадки розташування параболи відносно осі абсцис.</p>
+
+        <div class="formula-display">
+            D = b² - 4ac
+        </div>
+
+        <div class="info-box history">
+            <span class="box-title">📜 Геометричний зв'язок</span>
+            <p>Декарт заснував аналітичну геометрію. Завдяки йому ми знаємо:
+            <ul>
+                <li>Якщо <b>D > 0</b>: Парабола перетинає вісь X у двох точках.</li>
+                <li>Якщо <b>D = 0</b>: Парабола лише торкається осі в одній точці.</li>
+                <li>Якщо <b>D < 0</b>: Парабола "летить" над або під віссю, не торкаючись її.</li>
+            </ul>
+            </p>
+        </div>
+
+        <div class="info-box fact">
+            <span class="box-title">📋 Цікавий факт: Останні дні</span>
+            <p>Декарт помер у Швеції. Королева Крістіна запросила його бути її вчителем, але змушувала займатися о 5-й ранку в холодному замку. Для Декарта, який все життя звик працювати в теплому ліжку, це виявилося фатальним — він застудився і помер від пневмонії.</p>
+        </div>
+
+        <blockquote>
+            "Мислю, отже існую" (Cogito, ergo sum) — головний принцип Декарта, який він застосовував і в математиці, прагнучи до абсолютної доведеності кожного кроку.
+        </blockquote>
+    </article>
+</div>
+
+<script>
+    function showArticle(id) {
+        document.getElementById('main-menu').style.display = 'none';
+        const articles = document.querySelectorAll('.content-section');
+        articles.forEach(art => art.style.display = 'none');
+        
+        const target = document.getElementById(id);
+        target.style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function goHome() {
+        const articles = document.querySelectorAll('.content-section');
+        articles.forEach(art => art.style.display = 'none');
+        document.getElementById('main-menu').style.display = 'flex';
+    }
+</script>
+
 </body>
 </html>
