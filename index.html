@@ -167,11 +167,10 @@
         .sol-text { display: none; margin-top: 1rem; color: #10b981; font-weight: bold; text-align: center; background: rgba(16, 185, 129, 0.1); padding: 0.5rem; border-radius: 0.5rem; }
 
         /* ТЕСТИ */
-        .test-wrap { max-width: 550px; margin: 0 auto; background: var(--card-bg); padding: 2rem; border-radius: 1.5rem; border: 1px solid var(--border-color); position: relative; }
+        .test-wrap { max-width: 550px; margin: 0 auto; background: var(--card-bg); padding: 2rem; border-radius: 1.5rem; border: 1px solid var(--border-color); }
         .progress-container { height: 6px; background: #374151; border-radius: 3px; margin-bottom: 1.5rem; overflow: hidden; }
         .progress-bar { height: 100%; background: var(--accent-color); width: 0%; transition: 0.4s; }
-        .opt-btn { background: #1f2937; border: 1px solid #374151; color: #fff; width: 100%; padding: 1rem; border-radius: 0.8rem; margin-top: 0.8rem; text-align: left; cursor: pointer; transition: 0.2s; }
-        .opt-btn:hover { border-color: var(--accent-color); background: #334155; }
+        .opt-btn { background: #1f2937; border: 1px solid #374151; color: #fff; width: 100%; padding: 1rem; border-radius: 0.8rem; margin-top: 0.8rem; text-align: left; cursor: pointer; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
@@ -211,7 +210,7 @@
             <span class="caption">Портрет Франсуа Вієта (1540–1603)</span>
         </div>
 
-        <p><b>Франсуа Вієт</b> народився 1540 року на півдні Франції в містечку Фонтене-ле-Конт у родині прокурора. Продовжуючи сімейну традицію, він вивчав право в університеті Пуатьє, де у 20 років отримав стунінь бакалавра юридичних наук. Проте його справжня пристрасть завжди належала "цариці наук".</p>
+        <p><b>Франсуа Вієт</b> народився 1540 року на півдні Франції в містечку Фонтене-ле-Конт у родині прокурора. Продовжуючи сімейну традицію, він вивчав право в університеті Пуатьє, де у 20 років отримав ступінь бакалавра юридичних наук. Проте його справжня пристрасть завжди належала "цариці наук".</p>
 
         <div class="info-block blue">
             <div class="block-header">📜 Історична довідка: Королівський дешифрувальник</div>
@@ -298,15 +297,13 @@
 
     <section id="test-choice" class="content-section">
         <button class="btn-back" onclick="goHome()">← Назад</button>
-        <div class="menu-grid" style="max-width:600px; margin: 0 auto;">
+        <div class="menu-grid" style="max-width:500px; margin: 0 auto;">
             <div class="nav-card" onclick="startQuiz('d')"><h2>Тест: Дискримінант</h2></div>
             <div class="nav-card" onclick="startQuiz('v')"><h2>Тест: Вієта</h2></div>
-            <div class="nav-card" onclick="startQuiz('t')"><h2>Квадратний тричлен</h2></div>
         </div>
     </section>
 
     <section id="quiz-page" class="content-section">
-        <button class="btn-back" onclick="showPage('test-choice')">← Назад до вибору тесту</button>
         <div class="test-wrap">
             <div class="progress-container"><div id="p-bar" class="progress-bar"></div></div>
             <p id="q-count" style="font-size: 0.8rem; color: var(--dim-text);"></p>
@@ -318,15 +315,14 @@
     <section id="result-page" class="content-section">
         <div class="test-wrap" style="text-align:center;">
             <h2>Твій результат:</h2>
-            <h1 id="res-val" style="color: var(--accent-color); font-size: 3.5rem; margin: 1rem 0;"></h1>
+            <h1 id="res-val" style="color: var(--accent-color); font-size: 3.5rem;"></h1>
             <button class="cat-btn active" onclick="showPage('test-choice')">Спробувати ще</button>
-            <button class="cat-btn" onclick="goHome()" style="margin-top:10px;">На головну</button>
         </div>
     </section>
 </div>
 
 <script>
-    const testData = {
+    const data = {
         d: [
             {q: "Чому дорівнює D у x²-4x+3=0?", a: ["4", "16", "8"], c: 0},
             {q: "Якщо D=0, скільки коренів?", a: ["0", "1", "2"], c: 1},
@@ -340,13 +336,6 @@
             {q: "Хто за фахом був Вієт?", a: ["Кухар", "Юрист", "Воїн"], c: 1},
             {q: "Рівняння з коренями 1 і 2?", a: ["x²-3x+2=0", "x²+3x+2=0", "x²-2x+1=0"], c: 0},
             {q: "Чи можна Вієта, якщо D < 0?", a: ["Так", "Ні", "Тільки в середу"], c: 1}
-        ],
-        t: [
-            {q: "Як виглядає загальний вигляд квадратного тричлена?", a: ["ax²+bx+c", "ax+b", "x³"], c: 0},
-            {q: "Яка перша дія при розкладанні тричлена на множники?", a: ["Знайти D та корені", "Намалювати графік", "Помножити на 0"], c: 0},
-            {q: "Якщо корені 2 і 3, як виглядає розклад?", a: ["(x-2)(x-3)", "(x+2)(x+3)", "x-2+x-3"], c: 0},
-            {q: "Чи можна розкласти тричлен, якщо D < 0?", a: ["Так", "Ні", "Тільки якщо a > 0"], c: 1},
-            {q: "Розкладіть x² - 5x + 6.", a: ["(x-2)(x-3)", "(x+2)(x+3)", "(x-1)(x-6)"], c: 0}
         ]
     };
 
@@ -355,8 +344,7 @@
     function showPage(id) {
         document.querySelectorAll('.content-section').forEach(s => s.style.display = 'none');
         document.getElementById('main-menu').style.display = (id === 'main-menu' ? 'flex' : 'none');
-        const target = document.getElementById(id);
-        if(target) target.style.display = 'block';
+        document.getElementById(id).style.display = 'block';
         window.scrollTo(0,0);
     }
 
@@ -378,10 +366,31 @@
     }
 
     function startQuiz(type) {
-        activeData = testData[type]; curIdx = 0; score = 0;
+        activeData = data[type]; curIdx = 0; score = 0;
         showPage('quiz-page'); renderQ();
     }
 
     function renderQ() {
         const q = activeData[curIdx];
-       
+        document.getElementById('q-title').innerText = q.q;
+        document.getElementById('q-count').innerText = `Питання ${curIdx + 1} з 5`;
+        document.getElementById('p-bar').style.width = (curIdx / 5 * 100) + '%';
+        let html = '';
+        q.a.forEach((opt, i) => {
+            html += `<button class="opt-btn" onclick="checkAnswer(${i})">${opt}</button>`;
+        });
+        document.getElementById('q-options').innerHTML = html;
+    }
+
+    function checkAnswer(i) {
+        if(i === activeData[curIdx].c) score++;
+        curIdx++;
+        if(curIdx < 5) renderQ(); else {
+            showPage('result-page');
+            document.getElementById('res-val').innerText = `${score} / 5`;
+        }
+    }
+</script>
+</body>
+                                                                                                 </html>
+                                                                                                 
