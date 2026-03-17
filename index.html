@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Математичний Довідник | CH4OSIC Edition</title>
+    <style>
+        /* ОСНОВНІ СТИЛІ ТА ТЕМНА ТЕМА */
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent-color: #38bdf8;
+            --text-color: #f1f5f9;
+            --secondary-text: #94a3b8;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* КОНТЕЙНЕР */
+        .container {
+            width: 90%;
+            max-width: 800px;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* ГОЛОВНЕ МЕНЮ */
+        #main-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .menu-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* СТИЛІЗОВАНІ КНОПКИ */
+        .nav-card {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 1rem;
+            border: 1px solid #334155;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+            box-shadow: 0 10px 15px -3px rgba(56, 189, 248, 0.2);
+        }
+
+        .nav-card h2 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        /* БЛОКИ КОНТЕНТУ */
+        .content-section {
+            display: none; /* Приховано за замовчуванням */
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 1.5rem;
+            text-align: left;
+            animation: slideIn 0.4s ease-out;
+            line-height: 1.6;
+        }
+
+        .formula-box {
+            background: #0f172a;
+            padding: 1.5rem;
+            border-left: 4px solid var(--accent-color);
+            border-radius: 0.5rem;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.25rem;
+            margin: 1.5rem 0;
+            color: var(--accent-color);
+        }
+
+        .bio-info {
+            color: var(--secondary-text);
+            font-size: 0.95rem;
+        }
+
+        /* КНОПКА НАЗАД */
+        .back-btn {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.75rem 1.5rem;
+            background: transparent;
+            color: var(--text-color);
+            border: 1px solid var(--secondary-text);
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .back-btn:hover {
+            background: var(--secondary-text);
+            color: var(--bg-color);
+        }
+
+        /* АНІМАЦІЇ */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* АДАПТИВНІСТЬ */
+        @media (max-width: 600px) {
+            .menu-title { font-size: 1.8rem; }
+            .container { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="main-menu">
+            <h1 class="menu-title">Математичні основи</h1>
+            <p style="color: var(--secondary-text);">Оберіть розділ для вивчення</p>
+            <div class="button-grid">
+                <div class="nav-card" onclick="showSection('discriminant')">
+                    <h2>Дискримінант</h2>
+                </div>
+                <div class="nav-card" onclick="showSection('vieta')">
+                    <h2>Теорема Вієта</h2>
+                </div>
+            </div>
+        </div>
+
+        <div id="discriminant" class="content-section">
+            <h1>Дискримінант</h1>
+            <p>Параметр квадратного рівняння, що визначає кількість його дійсних коренів.</p>
+            
+            <div class="formula-box">
+                D = b² - 4ac
+            </div>
+
+            <h3>Історія та походження</h3>
+            <p>Сам термін "дискримінант" (від латинського <i>discriminans</i> — "той, що розрізняє") був введений британським математиком <b>Джеймсом Джозефом Сильвестром</b> у 1851 році.</p>
+            
+            <p class="bio-info">Хоча формули для розв'язання квадратних рівнянь були відомі ще стародавнім вавилонянам, а сучасний алгебраїчний запис розвинув Рене Декарт, саме Сильвестр дав назву цій величині в рамках теорії інваріантів.</p>
+            
+            <button class="back-btn" onclick="showMainMenu()">← Назад</button>
+        </div>
+
+        <div id="vieta" class="content-section">
+            <h1>Теорема Вієта</h1>
+            <p>Встановлює зв'язок між коефіцієнтами многочлена та його коренями.</p>
+            
+            <div class="formula-box">
+                x₁ + x₂ = -p <br>
+                x₁ * x₂ = q
+            </div>
+
+            <h3>Франсуа Вієт (1540–1603)</h3>
+            <p>Французький математик, якого називають "батьком сучасної алгебри". Він першим почав використовувати літери для позначення не тільки невідомих, а й коефіцієнтів.</p>
+            
+            <div class="bio-info">
+                <strong>Цікавий факт:</strong> За освітою Вієт був юристом і служив радником королів Генріха III та Генріха IV. Він також був видатним криптографом — під час війни з Іспанією він розгадав складний іспанський шифр, що допомогло Франції здобути перемогу.
+            </div>
+
+            <button class="back-btn" onclick="showMainMenu()">← Назад</button>
+        </div>
+    </div>
+
+    <script>
+        // Функція для перемикання на блок контенту
+        function showSection(sectionId) {
+            // Приховуємо головне меню
+            document.getElementById('main-menu').style.display = 'none';
+            
+            // Приховуємо всі секції (про всяк випадок)
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(s => s.style.display = 'none');
+            
+            // Показуємо потрібну секцію
+            const activeSection = document.getElementById(sectionId);
+            activeSection.style.display = 'block';
+        }
+
+        // Функція для повернення на головну
+        function showMainMenu() {
+            // Приховуємо всі секції
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(s => s.style.display = 'none');
+            
+            // Показуємо головне меню
+            document.getElementById('main-menu').style.display = 'flex';
+        }
+    </script>
+</body>
+</html>
+
