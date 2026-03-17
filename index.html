@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Math History & Practice | CH4OSIC Edition</title>
+    <title>Math History & Practice | CH4OSIC</title>
     <style>
         :root {
             --bg-color: #0b0f1a;
@@ -60,7 +60,7 @@
         .hero-title {
             font-size: clamp(2.5rem, 8vw, 3.5rem);
             font-weight: 800;
-            margin-bottom: 1rem;
+            margin-bottom: 2rem;
             background: linear-gradient(to right, #38bdf8, #818cf8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -71,7 +71,6 @@
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1.5rem;
             width: 100%;
-            margin-top: 2rem;
         }
 
         .nav-card {
@@ -84,19 +83,19 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
         .nav-card img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
+            width: 90px;
+            height: 90px;
+            border-radius: 18px;
             object-fit: cover;
             border: 2px solid var(--border-color);
         }
         .nav-card:hover { 
             transform: translateY(-8px); 
             border-color: var(--accent-color);
-            box-shadow: 0 10px 25px rgba(56, 189, 248, 0.2);
+            box-shadow: 0 10px 25px rgba(56, 189, 248, 0.15);
         }
         .nav-card h2 { margin: 0; font-size: 1.1rem; }
 
@@ -142,9 +141,9 @@
             font-family: serif;
         }
 
-        .quote { text-align: center; color: var(--dim-text); margin-top: 3rem; font-style: italic; border-top: 1px solid var(--border-color); padding-top: 1rem; }
+        .quote { text-align: center; color: var(--dim-text); margin-top: 3rem; font-style: italic; padding-top: 1rem; }
 
-        /* РОЗДІЛ ЗАДАЧ */
+        /* ЗАДАЧІ */
         .category-menu { display: flex; justify-content: center; gap: 10px; margin-bottom: 2rem; flex-wrap: wrap; }
         .cat-btn { background: #1f2937; border: 1px solid #374151; color: #fff; padding: 0.6rem 1.2rem; border-radius: 2rem; cursor: pointer; transition: 0.3s; }
         .cat-btn.active { background: var(--accent-color); color: #000; border-color: var(--accent-color); }
@@ -155,7 +154,6 @@
             padding: 1.5rem; 
             border-radius: 1rem; 
             border: 1px solid var(--border-color); 
-            position: relative; 
             display: none; 
             flex-direction: column;
             justify-content: space-between;
@@ -172,12 +170,9 @@
         .test-wrap { max-width: 550px; margin: 0 auto; background: var(--card-bg); padding: 2rem; border-radius: 1.5rem; border: 1px solid var(--border-color); }
         .progress-container { height: 6px; background: #374151; border-radius: 3px; margin-bottom: 1.5rem; overflow: hidden; }
         .progress-bar { height: 100%; background: var(--accent-color); width: 0%; transition: 0.4s; }
-        .opt-btn { background: #1f2937; border: 1px solid #374151; color: #fff; width: 100%; padding: 1rem; border-radius: 0.8rem; margin-top: 0.8rem; text-align: left; cursor: pointer; transition: 0.2s; }
-        .opt-btn:hover { border-color: var(--accent-color); background: #334155; }
+        .opt-btn { background: #1f2937; border: 1px solid #374151; color: #fff; width: 100%; padding: 1rem; border-radius: 0.8rem; margin-top: 0.8rem; text-align: left; cursor: pointer; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        @media (max-width: 768px) { .portrait-frame { float: none; margin: 0 auto 2rem; } .hero-title { font-size: 2.2rem; } }
     </style>
 </head>
 <body>
@@ -185,7 +180,6 @@
 <div class="container">
     <div id="main-menu">
         <h1 class="hero-title">Математичний Архів</h1>
-        <p style="color: var(--dim-text); margin-bottom: 2rem;">Досліджуй, навчайся, практикуй</p>
         <div class="menu-grid">
             <div class="nav-card" onclick="showPage('vieta-page')">
                 <img src="vieta.jpg" alt="Вієт">
@@ -196,11 +190,11 @@
                 <h2>Рене Декарт</h2>
             </div>
             <div class="nav-card" onclick="showPage('tasks-page')">
-                <div style="font-size: 2.5rem; margin-bottom: 5px;">📝</div>
+                <div style="font-size: 3rem; padding: 10px;">📝</div>
                 <h2>Задачі</h2>
             </div>
             <div class="nav-card" onclick="showPage('test-choice')">
-                <div style="font-size: 2.5rem; margin-bottom: 5px;">📊</div>
+                <div style="font-size: 3rem; padding: 10px;">📊</div>
                 <h2>Тестування</h2>
             </div>
         </div>
@@ -216,21 +210,29 @@
             <span class="caption">Портрет Франсуа Вієта (1540–1603)</span>
         </div>
 
-        <p><b>Франсуа Вієт</b> народився 1540 року на півдні Франції в містечку Фонтене-ле-Конт у родині прокурора. Він вивчав право, але його справжня пристрасть завжди належала "цариці наук".</p>
+        <p><b>Франсуа Вієт</b> народився 1540 року на півдні Франції в містечку Фонтене-ле-Конт у родині прокурора. Продовжуючи сімейну традицію, він вивчав право в університеті Пуатьє, де у 20 років отримав ступінь бакалавра юридичних наук. Проте його справжня пристрасть завжди належала "цариці наук".</p>
 
         <div class="info-block blue">
             <div class="block-header">📜 Історична довідка: Королівський дешифрувальник</div>
-            <p>Вієт за 15 днів розгадав іспанський шифр із 500 символів, чим врятував Францію під час війни. Іспанський король навіть подав скаргу Папі Римському, вимагаючи суду над "чаклуном" Вієтом.</p>
+            <p>Вієт служив радником королів Генріха III та Генріха IV. Під час війни з Іспанією він врятував Францію не зброєю, а розумом. Іспанці використовували шифр із 500 символів, який Вієт розгадав за 15 днів. Отримавши таку перевагу, Франція знала кожен крок ворога. Розлючений іспанський король навіть подав скаргу Папі Римському, вимагаючи суду над "чаклуном" Вієтом.</p>
         </div>
 
         <h3>Математичний прорив</h3>
-        <p>Вієт зробив революційний крок — він почав використовувати літери не лише для невідомих, а й для відомих величин (параметрів).</p>
+        <p>До Вієта алгебра була "геометричною" або "словесною". Рівняння записували цілими реченнями, що робило розв'язання довгим і заплутаним. Вієт зробив революційний крок — він почав використовувати літери не лише для невідомих, а й для відомих величин (параметрів).</p>
 
-        <div class="formula-box">x₁ + x₂ = -p <br> x₁ · x₂ = q</div>
+        <div class="formula-box">
+            x₁ + x₂ = -p<br>
+            x₁ · x₂ = q
+        </div>
 
         <div class="info-block yellow">
             <div class="block-header">💡 Важливо знати</div>
-            <p>Саме завдяки Вієту алгебра відокремилася від геометрії. Це дозволило вивчати властивості рівнянь у загальному вигляді.</p>
+            <p>Саме завдяки Вієту алгебра відокремилася від геометрії. Його система дозволила вивчати властивості рівнянь у загальному вигляді, незалежно від конкретних чисел. Це стало фундаментом для всього подальшого розвитку науки.</p>
+        </div>
+
+        <div class="info-block blue">
+            <div class="block-header">📜 Цікавий факт</div>
+            <p>Вієт був неймовірно працездатним. Кажуть, що коли він захоплювався якоюсь проблемою, він міг не спати й не їсти по три доби поспіль, повністю занурившись у розрахунки.</p>
         </div>
     </section>
 
@@ -244,25 +246,29 @@
             <span class="caption">Рене Декарт (1596–1650)</span>
         </div>
 
-        <p><b>Рене Декарт</b> — людина, яка навчила світ сумніватися у всьому. Він ввів поняття дискримінанта, що походить від латинського <i>discriminans</i> ("розрізняти").</p>
+        <p><b>Рене Декарт</b> — людина, яка навчила світ сумніватися у всьому, крім математики. Він народився в 1596 році. У дитинстві Рене мав дуже слабке здоров'я, через що в коледжі Ла-Флеш йому офіційно дозволяли лежати в ліжку до обіду. Ці години "лінивих" роздумів стали найпродуктивнішими в його житті.</p>
+
+        <h3>Етимологія та зміст</h3>
+        <p>Слово "дискримінант" походить від латинського <i>discriminans</i>, що означає "розрізняти". Ця назва ідеально відображає його суть — він "розрізняє" випадки розташування параболи відносно осі абсцис.</p>
 
         <div class="formula-box">D = b² - 4ac</div>
 
         <div class="info-block green">
             <div class="block-header">📜 Геометричний зв'язок</div>
+            <p>Декарт заснував аналітичну геометрію. Завдяки йому ми знаємо:</p>
             <ul>
                 <li>Якщо <b>D > 0</b>: Парабола перетинає вісь X у двох точках.</li>
                 <li>Якщо <b>D = 0</b>: Парабола лише торкається осі в одній точці.</li>
-                <li>Якщо <b>D < 0</b>: Парабола не торкається осі X.</li>
+                <li>Якщо <b>D < 0</b>: Парабола "летить" над або під віссю, не торкаючись її.</li>
             </ul>
         </div>
 
         <div class="info-block yellow">
             <div class="block-header">📜 Цікавий факт: Останні дні</div>
-            <p>Декарт помер у Швеції від пневмонії, бо королева змушувала його займатися філософією о 5-й ранку в холодному замку.</p>
+            <p>Декарт помер у Швеції. Королева Крістіна запросила його бути її вчителем, але змушувала займатися о 5-й ранку в холодному замку. Для Декарта, який все життя звик працювати в теплому ліжку, це виявилося фатальним — він застудився і помер від пневмонії.</p>
         </div>
 
-        <p class="quote">"Мислою, отже існую" (Cogito, ergo sum) — головний принцип Декарта.</p>
+        <p class="quote">"Мислою, отже існую" (Cogito, ergo sum) — головний принцип Декарта, який він застосовував і в математиці, прагнучи до абсолютної доведеності кожного кроку.</p>
     </section>
 
     <section id="tasks-page" class="content-section">
@@ -274,18 +280,18 @@
             <button class="cat-btn" onclick="filterTasks('type-t', this)">Тричлен</button>
         </div>
         <div class="tasks-grid" id="tasks-grid-container">
-            <div class="task-card type-d" style="display:flex">x² - 6x + 9 = 0. Знайти D.<button class="sol-btn" onclick="toggleSol(this)">Розв'язок</button><div class="sol-text">D = 0</div></div>
-            <div class="task-card type-v" style="display:flex">x² - 8x + 12 = 0. Сума та добуток?<button class="sol-btn" onclick="toggleSol(this)">Розв'язок</button><div class="sol-text">Сума: 8, Добуток: 12</div></div>
+            <div class="task-card type-d" style="display:flex">x² - 6x + 9 = 0. Знайдіть D.<button class="sol-btn" onclick="toggleSol(this)">Розв'язок</button><div class="sol-text">0</div></div>
+            <div class="task-card type-v" style="display:flex">x² - 8x + 12 = 0. Сума та добуток?<button class="sol-btn" onclick="toggleSol(this)">Розв'язок</button><div class="sol-text">8, 12</div></div>
             <div class="task-card type-t" style="display:flex">Розкладіть x² - 4x + 3.<button class="sol-btn" onclick="toggleSol(this)">Розв'язок</button><div class="sol-text">(x-1)(x-3)</div></div>
-            <div class="task-card type-d" style="display:flex">x² + 3x + 5 = 0. Скільки коренів?<button class="sol-btn" onclick="toggleSol(this)">Розв'язок</button><div class="sol-text">Немає (D < 0)</div></div>
+            <div class="task-card type-d" style="display:flex">x² + 3x + 5 = 0. Скільки коренів?<button class="sol-btn" onclick="toggleSol(this)">Розв'язок</button><div class="sol-text">Немає</div></div>
             <div class="task-card type-v" style="display:flex">Корені: -2 та 5. Складіть рівняння.<button class="sol-btn" onclick="toggleSol(this)">Розв'язок</button><div class="sol-text">x² - 3x - 10 = 0</div></div>
-            <div class="task-card type-d" style="display:flex">2x² - 5x + 2 = 0. Знайти D.<button class="sol-btn" onclick="toggleSol(this)">Розв'язок</button><div class="sol-text">D = 9</div></div>
-            <div class="task-card type-v" style="display:flex">x² + 10x + 21 = 0. Корені за Вієтом.<button class="sol-btn" onclick="toggleSol(this)">Розв'язок</button><div class="sol-text">-3 та -7</div></div>
+            <div class="task-card type-d" style="display:flex">2x² - 5x + 2 = 0. Знайти D.<button class="sol-btn" onclick="toggleSol(this)">Розв'язок</button><div class="sol-text">9</div></div>
+            <div class="task-card type-v" style="display:flex">x² + 10x + 21 = 0. Корені за Вієтом.<button class="sol-btn" onclick="toggleSol(this)">Розв'язок</button><div class="sol-text">-3, -7</div></div>
             <div class="task-card type-t" style="display:flex">Розкладіть x² + 5x + 6.<button class="sol-btn" onclick="toggleSol(this)">Розв'язок</button><div class="sol-text">(x+2)(x+3)</div></div>
-            <div class="task-card type-d" style="display:flex">x² - 4x + 4 = 0. Кількість коренів.<button class="sol-btn" onclick="toggleSol(this)">Розв'язок</button><div class="sol-text">1 корінь (D = 0)</div></div>
-            <div class="task-card type-v" style="display:flex">x² - 5x - 14 = 0. Сума та добуток?<button class="sol-btn" onclick="toggleSol(this)">Розв'язок</button><div class="sol-text">Сума: 5, Добуток: -14</div></div>
+            <div class="task-card type-d" style="display:flex">x² - 4x + 4 = 0. Кількість коренів.<button class="sol-btn" onclick="toggleSol(this)">Розв'язок</button><div class="sol-text">1 корінь</div></div>
+            <div class="task-card type-v" style="display:flex">x² - 5x - 14 = 0. Сума та добуток?<button class="sol-btn" onclick="toggleSol(this)">Розв'язок</button><div class="sol-text">5, -14</div></div>
             <div class="task-card type-t" style="display:flex">Подайте у добутку x² - 2x - 8.<button class="sol-btn" onclick="toggleSol(this)">Розв'язок</button><div class="sol-text">(x-4)(x+2)</div></div>
-            <div class="task-card type-t" style="display:flex">x² + x + 1. Чи можна розкласти?<button class="sol-btn" onclick="toggleSol(this)">Розв'язок</button><div class="sol-text">Ні (D < 0)</div></div>
+            <div class="task-card type-t" style="display:flex">x² + x + 1. Чи можна розкласти?<button class="sol-btn" onclick="toggleSol(this)">Розв'язок</button><div class="sol-text">Ні</div></div>
         </div>
     </section>
 
@@ -300,7 +306,7 @@
     <section id="quiz-page" class="content-section">
         <div class="test-wrap">
             <div class="progress-container"><div id="p-bar" class="progress-bar"></div></div>
-            <p id="q-count" style="font-size: 0.8rem; color: var(--dim-text); margin-bottom: 0.5rem;"></p>
+            <p id="q-count" style="font-size: 0.8rem; color: var(--dim-text);"></p>
             <h3 id="q-title" style="margin-top:0;"></h3>
             <div id="q-options"></div>
         </div>
@@ -309,9 +315,8 @@
     <section id="result-page" class="content-section">
         <div class="test-wrap" style="text-align:center;">
             <h2>Твій результат:</h2>
-            <h1 id="res-val" style="color: var(--accent-color); font-size: 3.5rem; margin: 1rem 0;"></h1>
+            <h1 id="res-val" style="color: var(--accent-color); font-size: 3.5rem;"></h1>
             <button class="cat-btn active" onclick="showPage('test-choice')">Спробувати ще</button>
-            <button class="cat-btn" onclick="goHome()" style="margin-top:10px;">На головну</button>
         </div>
     </section>
 </div>
@@ -339,8 +344,7 @@
     function showPage(id) {
         document.querySelectorAll('.content-section').forEach(s => s.style.display = 'none');
         document.getElementById('main-menu').style.display = (id === 'main-menu' ? 'flex' : 'none');
-        const target = document.getElementById(id);
-        if(target) target.style.display = 'block';
+        document.getElementById(id).style.display = 'block';
         window.scrollTo(0,0);
     }
 
